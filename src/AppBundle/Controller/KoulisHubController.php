@@ -9,29 +9,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class KoulisHubController extends Controller
 {
     /**
-     * @Route("/", name="koulishub")
+     * @Route("/{username}", name="koulishub", defaults={ "username": "siluok3" })
      *
      * @param Request $request
+     * @param string $username
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function koulisHubAction(Request $request)
+    public function koulisHubAction(Request $request, $username)
     {
         return $this->render('koulishub/index.html.twig', [
-            'avatar_url' => 'https://avatars1.githubusercontent.com/u/11785506?v=4',
-            'name'       => 'Kiriakos Papachristou',
-            'login'      => 'siluok3',
-            'details'    => [
-                'company'   => 'trivago',
-                'location'  => 'Palma De Mallorca',
-                'joined_on' => 'Joined on 3rd of April 2015'
-
-            ],
-            'blog'         => 'https://www.linkedin.com/in/kiriakospapachristou/',
-            'social_data'  => [
-                "Public repos" => 19,
-                "Followers"    => 0,
-                "Following"    => 1
-            ],
+            'username'     => $username,
             'repo_count'   => 20,
             'most_stars'   => 4,
             'repos'        => [
@@ -58,29 +45,16 @@ class KoulisHubController extends Controller
     }
 
     /**
-     * @Route("/profile", name="profile")
+     * @Route("/profile/{username}", name="profile")
      *
      * @param Request $request
+     * @param string $username
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    /*public function profileAction(Request $request)
+    public function profileAction(Request $request, $username)
     {
-        return $this->render('koulishub/profile.html.twig', [
-            'avatar_url' => 'https://avatars1.githubusercontent.com/u/11785506?v=4',
-            'name'       => 'Kiriakos Papachristou',
-            'login'      => 'siluok3',
-            'details'    => [
-                'company'   => 'trivago',
-                'location'  => 'Palma De Mallorca',
-                'joined_on' => 'Joined on 3rd of April 2015'
+        $profileData = $this->get('koulishub_api')->getProfile($username);
 
-            ],
-            'blog'         => 'https://www.linkedin.com/in/kiriakospapachristou/',
-            'social_data'  => [
-                "Public repos" => 19,
-                "Followers"    => 0,
-                "Following"    => 1
-            ]
-        ]);
-    }*/
+        return $this->render('koulishub/profile.html.twig', $profileData);
+    }
 }

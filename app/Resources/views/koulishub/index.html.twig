@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="col-sm-3">
-        {%  include '/koulishub/profile.html.twig' %}
+        {{ render(controller('AppBundle:KoulisHub:profile', { 'username':username })) }}
     </div>
 
     <div class="col-sm-9">
