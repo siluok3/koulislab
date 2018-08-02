@@ -31,6 +31,28 @@ class KoulisHubController extends Controller
                 "Public repos" => 19,
                 "Followers"    => 0,
                 "Following"    => 1
+            ],
+            'repo_count'   => 20,
+            'most_stars'   => 4,
+            'repos'        => [
+                [
+                    'name'             => 'first repo',
+                    'url'              => 'https://github.com/siluok3',
+                    'stargazers_count' => 10,
+                    'description'      => 'first repo description'
+                ],
+                [
+                    'name'             => 'second repo',
+                    'url'              => 'https://github.com/siluok3',
+                    'stargazers_count' => 2,
+                    'description'      => 'second repo description'
+                ],
+                [
+                    'name'             => 'third repo',
+                    'url'              => 'https://github.com/siluok3',
+                    'stargazers_count' => 5,
+                    'description'      => 'third repo description'
+                ],
             ]
         ]);
     }
