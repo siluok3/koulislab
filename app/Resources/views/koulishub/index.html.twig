@@ -6,6 +6,6 @@
     </div>
 
     <div class="col-sm-9">
-        {% include '/koulishub/repos.html.twig' %}
+        {{ render(controller('AppBundle:KoulisHub:repos', { 'username':username })) }}
     </div>
 {% endblock body %}
