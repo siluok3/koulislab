@@ -33,4 +33,36 @@ class KoulishubApi
             ]
         ];
     }
+
+    /**
+     * @param $username
+     * @return array $data
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getRepos($username)
+    {
+        $client =  new \GuzzleHttp\Client();
+        $response = $client->request('GET', 'https://api.github.com/users/'.$username.'/repos');
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        return [
+            'repo_count'   => count($data),
+            'most_stars'   => $this->getRepositoriesMostStars($data),
+            'repos'        => $data,
+        ];
+    }
+
+    /**
+     * @param $data
+     * @return int $mostStarredRepo
+     */
+    private function getRepositoriesMostStars($data)
+    {
+        $mostStarredRepo = array_reduce($data, function($mostStars, $currentRepo) {
+            $currentStars = $currentRepo['stargazers_count'];
+            return $currentStars > $mostStars ? $currentStars : $mostStars;
+        }, 0);
+
+        return $mostStarredRepo;
+    }
 }
